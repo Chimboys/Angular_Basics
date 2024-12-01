@@ -91,4 +91,80 @@ imagePath = computed<string>( () => {
    return "assets/users/" + this.avatar()
 })
 ```
+### output signal
+select = output<string>();
+onSelectUser (){
+this.select.emit(this.id); //to pass back the value to parent component
+}
+
+
+### @Output
+$event holds the data that omitted by an event 
+
+
+### Dynamic templating (track is used to differ elements between each other)
+```
+ <ul id="users">
+    @for (user of users; track user.id){
+      <li>
+        <app-user [user] ="user" (select)="onSelectUser($event)" />
+      </li>
+    }
+  </ul>
+```
+### New Angular Features Structural Directives for Dynamic Templates
+```aiignore
+// Add to the component that uses this html template
+// import of NgFor from angular/common
+// Add NgFor for Imports
+import {NgFor} from '@angular/common';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [HeaderComponent, UserComponent, TasksComponent, NgFor],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+
+///actual use
+<ul *ngFor="let user of users" id="users">
+      <li>
+        <app-user [user] ="user" (select)="onSelectUser($event)" />
+      </li>
+  </ul>
+```
+
+### Conditional templating
+```
+@if (selectedUser){
+    <app-tasks [name]="selectedUser.name"/>
+  } @else {
+    <p id="fallback">Select a user to see their task</p>
+  }
+```
+### Conditional templating with NgIf
+```aiignore
+// Same for a file that uses this html 
+import {NgFor, NgIf} from '@angular/common';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [HeaderComponent, UserComponent, TasksComponent, NgFor, NgIf],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent 
+
+//Actual Use of NgIf, create a var that will represent else block
+//Add ng-template with id of that variable #variable
+//Wrap all html for else within ngtemplate
+
+ <app-tasks *ngIf="selectedUser; else fallback" [name]="selectedUser.name"/>
+  <ng-template #fallback> 
+    <p id="fallback">Select a user to see their task</p>
+  </ng-template>
+
+```
+
+
 
