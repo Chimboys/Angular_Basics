@@ -83,5 +83,12 @@ selected().name //to get
 selected.set("New Value") //setter
 
 imagePath = computed(() => 'assets/user/' + this.selectedUser().avatar) //computes only if signal used inside of it
+
+name = input<string>(); //inputs with signals without decorators acts like props
+avatar = input.required<string>(); //they are readonly , cannot use avatar.set()
+
+imagePath = computed<string>( () => {
+   return "assets/users/" + this.avatar()
+})
 ```
 
