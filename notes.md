@@ -166,5 +166,6 @@ export class AppComponent
 
 ```
 
+### Create .model.ts file within subfolder of component to define and export interfaces used by a component 
 
 

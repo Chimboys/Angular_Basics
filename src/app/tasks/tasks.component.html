@@ -1,1 +1,18 @@
-<p>{{"name of user is "+ name}}</p>
+<section id="tasks">
+  <header>
+    <h2>  {{name}}'s Task </h2>
+    <menu>
+      <button >Add Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    <li>
+      @for (task of selectedUserTasks; track task.id){
+        <app-task [taskProp]="task" (complete)="onCompleteTask($event)"/>
+      }
+
+    </li>
+  </ul>
+</section>
+
