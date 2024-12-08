@@ -2,9 +2,14 @@
   <header>
     <h2>  {{name}}'s Task </h2>
     <menu>
-      <button >Add Task</button>
+      <button (click)="onClickAddTask()" >Add Task</button>
     </menu>
   </header>
+
+  @if (isAddingTask) {
+      <app-new-task (cancelAddingTaskEvent)="onCancelAddTask()" (addTaskEvent)="onAddNewTask($event)"/>
+  }
+
 
   <ul>
     <li>

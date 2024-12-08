@@ -1,9 +1,10 @@
-<article>
-  <h2>{{taskProp.title}}</h2>
-  <time>{{taskProp.dueDate}}</time>
-  <p>{{taskProp.summary}}</p>
-  <p class="actions">
-    <button (click)="emitCompleteEvent()"> Complete </button>
-  </p>
-
-</article>
+<app-card>
+  <article>
+    <h2>{{taskProp.title}}</h2>
+    <time>{{taskProp.dueDate | date:'fullDate'}}</time>
+    <p>{{taskProp.summary}}</p>
+    <p class="actions">
+      <button (click)="emitCompleteEvent()"> Complete </button>
+    </p>
+  </article>
+</app-card>
