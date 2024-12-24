@@ -4,7 +4,7 @@
     <time>{{taskProp.dueDate | date:'fullDate'}}</time>
     <p>{{taskProp.summary}}</p>
     <p class="actions">
-      <button (click)="emitCompleteEvent()"> Complete </button>
+      <button (click)="onCompleteEvent()"> Complete </button>
     </p>
   </article>
 </app-card>

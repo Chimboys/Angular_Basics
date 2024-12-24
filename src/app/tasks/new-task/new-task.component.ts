@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {taskDataToAddTask} from './new-task.model';
-
-
+import {TasksService} from "../tasks.service"
 
 @Component({
   selector: 'app-new-task',
@@ -15,19 +14,24 @@ import {taskDataToAddTask} from './new-task.model';
   standalone: true,
 })
 export class NewTaskComponent {
-  @Output() cancelAddingTaskEvent = new EventEmitter<void>()
-  @Output() addTaskEvent = new EventEmitter<taskDataToAddTask>()
+  @Output() close = new EventEmitter<void>()
+  @Input({required:true}) selectedUserId!:string;
+
   public enteredTitle:string = "";
   public enteredSummary:string = "";
   public enteredDate:string = "";
 
+  constructor(private taskService: TasksService) {}
+
+  createTaskViaService(){
+    this.taskService.addTaskToTask({title:this.enteredTitle, summary:this.enteredSummary, date:this.enteredDate}, this.selectedUserId)
+    this.close.emit();
+  }
   onCancel(){
-    this.cancelAddingTaskEvent.emit();
+    this.close.emit();
   }
 
-  onSubmit(){
-    this.addTaskEvent.emit({title:this.enteredTitle, summary:this.enteredSummary, date:this.enteredDate});
-  }
+
 
 
 }
