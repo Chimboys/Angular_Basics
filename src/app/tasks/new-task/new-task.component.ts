@@ -6,12 +6,9 @@ import {TasksService} from "../tasks.service"
 
 @Component({
   selector: 'app-new-task',
-  imports: [
-    FormsModule
-  ],
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.css',
-  standalone: true,
+  standalone: false,
 })
 export class NewTaskComponent {
   @Output() close = new EventEmitter<void>()
